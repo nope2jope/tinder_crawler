@@ -14,7 +14,7 @@ driver.get('https:/tinder.com')
 login_button = driver.find_element_by_xpath('//*[@id="t-1890905246"]/div/div[1]/div/main/div[1]/div/div/div/div/header/div/div[2]/div[2]/button')
 login_button.click()
 
-# establish landing page handle such that you can travel to and fro
+# establish landing page handle such that you can travel to and from
 main_handle = driver.current_window_handle
 
 # sleep commands allow selenium to catch up--without them it may struggle to locate elements
@@ -40,5 +40,18 @@ for handle in current_handles:
         driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input').send_keys(PW)
         driver.find_element_by_xpath('//*[@id="password"]/div[1]/div/div[1]/input').send_keys(Keys.RETURN)
 
+time.sleep(5)
 
+# revert to main handle
+driver.switch_to.window(main_handle)
+
+# locates and assignes "like" button
+heart_button = driver.find_element_by_xpath('//*[@id="t-1890905246"]/div/div[1]/div/div/main/div/div[1]/div/div[2]/div[4]/button')
+
+#like!
+while True:
+    try:
+        heart_button.click()
+    finally:
+        driver.close()
 
